@@ -1,0 +1,385 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>MShBlog - 记录技术点滴，分享学习心得</title><meta name="author" content="Msh"><meta name="copyright" content="Msh"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="这是一个关于编程、技术和生活的个人博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MShBlog">
+<meta property="og:url" content="https://msh-18751628429.github.io/project/index.html">
+<meta property="og:site_name" content="MShBlog">
+<meta property="og:description" content="这是一个关于编程、技术和生活的个人博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://msh-18751628429.github.io/project/images/avatar.jpg">
+<meta property="article:author" content="Msh">
+<meta property="article:tag" content="编程,技术,博客,前端,后端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://msh-18751628429.github.io/project/images/avatar.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/project/img/favicon.png"><link rel="canonical" href="https://msh-18751628429.github.io/project/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/project/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/project/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'MShBlog',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><style>
+  /* 黑暗模式代码块全局修复 */
+[data-theme="dark"] {
+  --highlight-bg: #1e1e1e;
+  --highlight-border: #2d2d2d;
+  --highlight-color: #d4d4d4;
+}
+
+[data-theme="dark"] .highlight,
+[data-theme="dark"] pre,
+[data-theme="dark"] code.hljs {
+  background: var(--highlight-bg) !important;
+  border-color: var(--highlight-border) !important;
+  color: var(--highlight-color) !important;
+}
+
+/* 行号背景 */
+[data-theme="dark"] .highlight .gutter {
+  background-color: #252526 !important;
+  border-right: 1px solid #2d2d2d !important;
+}
+
+/* 代码块标题栏 */
+[data-theme="dark"] .highlight figcaption {
+  background-color: #252526 !important;
+  border-bottom: 1px solid #2d2d2d !important;
+  color: #ccc !important;
+}
+  
+  #body-wrap .post{
+   background: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(3px);
+    
+    -webkit-backdrop-filter: blur(2px) saturate(180%);
+   
+  }
+  #card-toc .card-widget{
+
+  background:rgba(255,255,255,0.4)!important;
+  }
+  /* TOC 项 */
+  #aside-content #card-toc .toc-item .toc-link {
+    color:#504e4e!important;
+  }
+  
+  /* TOC 激活项 */
+  #aside-content #card-toc .toc-item.active .toc-link {
+    color:#121212 !important;
+    
+    background:rgba(255,255,255,0.5)!important;
+ 
+  }
+  
+  /* TOC 悬停 */
+  #aside-content #card-toc .toc-item .toc-link:hover {
+    color:#121212 !important;
+   background:rgba(255,255,255,0.5)!important;
+ 
+  }
+  
+  #post{
+   background:rgba(255,255,255,0.45)!important;
+ 
+  }
+  #recent-posts .recent-post-item > .recent-post-info > .article-title {
+    color: #121212!important;}
+  #recent-posts .recent-post-item > .recent-post-info > .article-meta-wrap{
+    color: #121212!important;}
+  #recent-posts .recent-post-item > .recent-post-info > .post-meta-date {
+    color: #121212!important;}
+  #recent-posts .recent-post-item > .recent-post-info > .content {
+    color: #121212!important;}
+  /* 卡片背景 */
+  #recent-posts .recent-post-item {
+  border:1px solid #bbbab175;
+  background: rgba(255,255,255,0.5) !important;
+    backdrop-filter: blur(3px) !important;
+    -webkit-backdrop-filter: blur(1px) !important;}
+  #content-inner {
+  border:1px solid #bbbab175;
+    background-color: rgba(255,255,255,0.5) !important;
+  }
+  .container pre{
+  background: rgba(255, 255, 255,0.55) !important;
+  }
+   .card-widget {
+   color:#121212;
+   border:1px solid #bbbab175;
+     background:  rgba(255,255,255,0.5) !important;
+    backdrop-filter: blur(2px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;}
+  }
+   
+  .site-data .headline{
+  color:#121212!important;
+  }
+  .site-data .headline{
+  color:#121212!important;
+  }
+  #aside-content .aside-list > .aside-list-item .content > .title{
+  color:rgba(56,165,187)!important;}
+  
+  .site-data > a .length-num{color:rgba(56,165,187)!important;}
+
+  #aside-content .card-archives ul.card-archive-list > .card-archive-list-item a span{
+  color:#504e4e!important;}
+
+  .card-recent-post .aside-list .no-cover .title,.card-recent-post .aside-list .no-cover time{
+  color:#121212!important;}
+
+  #aside-content .card-categories ul.card-category-list > .card-category-list-item a span{
+  color:#504e4e!important;}
+  /* 归档页面卡片样式 */
+  #archive{
+  background:rgba(255,255,255,0.3);
+ 
+  color:#504e4e!important;
+  border:1px solid #bbbab175;
+  }
+  #archive .article-sort-item-title{color:#504e4e!important;}
+  
+  
+  /* 分类页面卡片样式 */
+  #page{
+  background: rgba(255,255,255,0.5);
+  border:1px solid #bbbab175;
+  backdrop-filter: blur(5px) !important;
+  color:#504e4e!important;
+  }
+
+  /* 标签页面卡片样式 */
+  #tag{
+  border:1px solid #bbbab175;
+  backdrop-filter: blur(5px) !important;
+  background: rgba(255,255,255,0.5);
+  color:#504e4e!important;
+  }
+  #nav {
+    background: rgba(255, 255, 255, 0.1);
+    font-family: 'Georgia', 'Times New Roman', 'Songti SC', serif;
+    
+  }
+   #footer {
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(2px) saturate(180%);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    color: #333;
+    margin-top:30px;
+  }
+  
+ 
+
+  .footer-nav {
+    font-size: 14px;
+    margin: 20px 0;
+  }
+  .footer-nav a {
+    color: #666;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+  }
+  .footer-nav a:hover {
+    color: #3498db;
+    text-decoration: underline;
+  }
+</style>
+<meta name="generator" content="Hexo 7.3.0"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/project/images/bg1.jpeg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/project/images/avatar.jpg" onerror="this.onerror=null;this.src='/project/images/error/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/project/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/project/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/project/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/project/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/project/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/project/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/project/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/project/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/project/comments/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(/project/images/home.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/project/"><span class="site-name">MShBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/project/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/project/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/project/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/project/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/project/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/project/comments/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">MShBlog</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover left"><a href="/project/2026/02/22/js%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/" title="js相关题目"><img class="post-bg" src="/project/images/cover.jpg" onerror="this.onerror=null;this.src='/project/images/error/404.jpg'" alt="js相关题目"></a></div><div class="recent-post-info"><a class="article-title" href="/project/2026/02/22/js%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/" title="js相关题目">js相关题目</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-02-22T08:48:54.000Z" title="发表于 2026-02-22 16:48:54">2026-02-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/project/categories/javascript/">javascript</a></span></div><div class="content">1.随机展示已经写好的祝福语123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869*&#123; 			padding: 0; 			margin: 0;      box-sizing: border-box; 		&#125; 		body&#123; 			background: #f5f5f5; 		&#125;    #main&#123; 		width: 440px; 		margin: 30px auto; 		position: relative; 		height: 450px;     &#125; 		.tabs&#123; 			width: 440px; 			height: 50px; 			line-height: 50px; 			display: flex; 			/* list-style: none; */ 			/* text-align...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/project/2026/02/18/echarts%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E9%A1%B9/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-02-18T11:16:02.778Z" title="发表于 2026-02-18 19:16:02">2026-02-18</time></span></div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/project/2026/02/17/uniapp-pj/" title="uniapp pj"><img class="post-bg" src="/project/images/cover.jpg" onerror="this.onerror=null;this.src='/project/images/error/404.jpg'" alt="uniapp pj"></a></div><div class="recent-post-info"><a class="article-title" href="/project/2026/02/17/uniapp-pj/" title="uniapp pj">uniapp pj</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-02-17T11:20:20.000Z" title="发表于 2026-02-17 19:20:20">2026-02-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/project/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/project/categories/%E5%89%8D%E7%AB%AF/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a></span></div><div class="content">uniapp-购物小程序一、创建uniapp项目 下载安装 HBuilderX从 DCloud官网下载适合你系统的版本。如果使用scss&#x2F;sass是需要安装compile-node-sass编译插件的。安装sass插件，需要到HBuilderX插件市场安装。  在HBuilderX新建–&gt;新建项目–&gt;uni-app–&gt;项目名称–&gt;选择模板（uni-ui）–&gt;创建  配置微信小程序manifest.json–微信小程序配置—微信小程序AppID–填入  初始化创建 package.json 1npm init -y 没有 node_modules&#x2F;文件夹 → 需要 npm install  在 HBuilderX 中运行打开项目 → 运行 → 选择运行到相应平台     项目目录unishop&#x2F;├── commponents&#x2F;      # 存放自定义组件（.vue文件）├── node_modules&#x2F;     # npm依赖包，通过 npm install 安装的所有第三方库├── uni_modu...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/project/2026/02/16/%E5%9F%BA%E7%A1%80/" title="无~~"><img class="post-bg" src="/project/images/cover.jpg" onerror="this.onerror=null;this.src='/project/images/error/404.jpg'" alt="无~~"></a></div><div class="recent-post-info"><a class="article-title" href="/project/2026/02/16/%E5%9F%BA%E7%A1%80/" title="无~~">无~~</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-02-16T07:50:50.000Z" title="发表于 2026-02-16 15:50:50">2026-02-16</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/project/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/project/categories/%E5%89%8D%E7%AB%AF/html/">html</a></span></div><div class="content">文字居中：text-align:center;宽度自适应 居左显示:float:left;width:auto; 水果拼盘12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364&lt;!-- 水果拼盘 --&gt;&lt;div id=&quot;board&quot;&gt;		&lt;div id=&quot;pond&quot;&gt;			&lt;div class=&quot;frog yellow&quot;&gt;				&lt;div class=&quot;bg animated pulse infinite&quot;&gt;&lt;/div&gt;			&lt;/div&gt;			&lt;div class=&quot;frog green&quot;&gt;				&lt;div class=&quot;bg animated pulse infinite&quot;&gt...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/project/2026/02/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" title="我的第一篇文章"><img class="post-bg" src="/project/images/cover.jpg" onerror="this.onerror=null;this.src='/project/images/error/404.jpg'" alt="我的第一篇文章"></a></div><div class="recent-post-info"><a class="article-title" href="/project/2026/02/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" title="我的第一篇文章">我的第一篇文章</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-02-03T03:00:54.000Z" title="发表于 2026-02-03 11:00:54">2026-02-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/project/categories/%E6%8A%80%E6%9C%AF/">技术</a></span></div><div class="content">Hexo 个人博客搭建一、环境准备1.1 安装 Node.js访问 Node.js官网 下载并安装 LTS 版本 验证安装： 12node -vnpm -v  1.2 安装 GitWindows: Git for Windows macOS: brew install git Linux: sudo apt-get install git  二、安装 Hexo2.1 全局安装 Hexo CLI1npm install -g hexo-cli 2.2 创建博客项目初始化博客12hexo init my-blogcd my-blog 安装依赖1npm install 2.3 目录结构说明my-blog&#x2F;├── _config.yml      站点配置文件├── scaffolds&#x2F;       模板文件夹├── source&#x2F;          资源文件夹│   ├── _posts&#x2F;      文章目录│   └── _drafts&#x2F;     草稿目录├── themes&#x2F;          主题文件夹└── packa...</div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/project/images/avatar.jpg" onerror="this.onerror=null;this.src='/project/images/error/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Msh</div><div class="author-info-description">这是一个关于编程、技术和生活的个人博客</div><div class="site-data"><a href="/project/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/project/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/project/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/msh-18751628429"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/project/2026/02/22/js%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/" title="js相关题目"><img src="/project/images/cover.jpg" onerror="this.onerror=null;this.src='/project/images/error/404.jpg'" alt="js相关题目"/></a><div class="content"><a class="title" href="/project/2026/02/22/js%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/" title="js相关题目">js相关题目</a><time datetime="2026-02-22T08:48:54.000Z" title="发表于 2026-02-22 16:48:54">2026-02-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/project/2026/02/18/echarts%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E9%A1%B9/" title="无标题">无标题</a><time datetime="2026-02-18T11:16:02.778Z" title="发表于 2026-02-18 19:16:02">2026-02-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/project/2026/02/17/uniapp-pj/" title="uniapp pj"><img src="/project/images/cover.jpg" onerror="this.onerror=null;this.src='/project/images/error/404.jpg'" alt="uniapp pj"/></a><div class="content"><a class="title" href="/project/2026/02/17/uniapp-pj/" title="uniapp pj">uniapp pj</a><time datetime="2026-02-17T11:20:20.000Z" title="发表于 2026-02-17 19:20:20">2026-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/project/2026/02/16/%E5%9F%BA%E7%A1%80/" title="无~~"><img src="/project/images/cover.jpg" onerror="this.onerror=null;this.src='/project/images/error/404.jpg'" alt="无~~"/></a><div class="content"><a class="title" href="/project/2026/02/16/%E5%9F%BA%E7%A1%80/" title="无~~">无~~</a><time datetime="2026-02-16T07:50:50.000Z" title="发表于 2026-02-16 15:50:50">2026-02-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/project/2026/02/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" title="我的第一篇文章"><img src="/project/images/cover.jpg" onerror="this.onerror=null;this.src='/project/images/error/404.jpg'" alt="我的第一篇文章"/></a><div class="content"><a class="title" href="/project/2026/02/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" title="我的第一篇文章">我的第一篇文章</a><time datetime="2026-02-03T03:00:54.000Z" title="发表于 2026-02-03 11:00:54">2026-02-03</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/project/categories/javascript/"><span class="card-category-list-name">javascript</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/project/categories/%E5%89%8D%E7%AB%AF/"><span class="card-category-list-name">前端</span><span class="card-category-list-count">2</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/project/categories/%E5%89%8D%E7%AB%AF/html/"><span class="card-category-list-name">html</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/project/categories/%E5%89%8D%E7%AB%AF/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="card-category-list-name">小程序</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/project/categories/%E6%8A%80%E6%9C%AF/"><span class="card-category-list-name">技术</span><span class="card-category-list-count">1</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/project/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 1.15em; color: rgb(57, 50, 50);">笔记</a><a href="/project/tags/uniapp/" style="font-size: 1.15em; color: rgb(66, 50, 50);">uniapp</a><a href="/project/tags/vue/" style="font-size: 1.15em; color: rgb(78, 100, 200);">vue</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/project/archives/2026/02/">
+            <span class="card-archive-list-date">
+              二月 2026
+            </span>
+            <span class="card-archive-list-count">5</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">5</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-02-22T12:24:30.602Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background: [object Object];"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Msh</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/project/js/utils.js?v=5.5.4"></script><script src="/project/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, {"typeSpeed":100,"backSpeed":50,"startDelay":500,"backDelay":1500,"loop":true,"showCursor":true,"cursorChar":"|"}))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@3.0.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["Hello, World!","欢迎来到我的技术博客","这里记录我的学习与思考","让我们一起进步 🚀"].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["Hello, World!","欢迎来到我的技术博客","这里记录我的学习与思考","让我们一起进步 🚀"])
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>js相关题目 | MShBlog</title><meta name="author" content="Msh"><meta name="copyright" content="Msh"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="做题笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js相关题目">
+<meta property="og:url" content="https://msh-18751628429.github.io/project/2026/02/22/js%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/index.html">
+<meta property="og:site_name" content="MShBlog">
+<meta property="og:description" content="做题笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://msh-18751628429.github.io/project/images/cover.jpg">
+<meta property="article:published_time" content="2026-02-22T08:48:54.000Z">
+<meta property="article:modified_time" content="2026-02-22T12:12:20.714Z">
+<meta property="article:author" content="Msh">
+<meta property="article:tag" content="编程,技术,博客,前端,后端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://msh-18751628429.github.io/project/images/cover.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "js相关题目",
+  "url": "https://msh-18751628429.github.io/project/2026/02/22/js%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/",
+  "image": "https://msh-18751628429.github.io/project/images/cover.jpg",
+  "datePublished": "2026-02-22T08:48:54.000Z",
+  "dateModified": "2026-02-22T12:12:20.714Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Msh",
+      "url": "https://msh-18751628429.github.io/project"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/project/img/favicon.png"><link rel="canonical" href="https://msh-18751628429.github.io/project/2026/02/22/js%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/project/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/project/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'js相关题目',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><style>
+  /* 黑暗模式代码块全局修复 */
+[data-theme="dark"] {
+  --highlight-bg: #1e1e1e;
+  --highlight-border: #2d2d2d;
+  --highlight-color: #d4d4d4;
+}
+
+[data-theme="dark"] .highlight,
+[data-theme="dark"] pre,
+[data-theme="dark"] code.hljs {
+  background: var(--highlight-bg) !important;
+  border-color: var(--highlight-border) !important;
+  color: var(--highlight-color) !important;
+}
+
+/* 行号背景 */
+[data-theme="dark"] .highlight .gutter {
+  background-color: #252526 !important;
+  border-right: 1px solid #2d2d2d !important;
+}
+
+/* 代码块标题栏 */
+[data-theme="dark"] .highlight figcaption {
+  background-color: #252526 !important;
+  border-bottom: 1px solid #2d2d2d !important;
+  color: #ccc !important;
+}
+  
+  #body-wrap .post{
+   background: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(3px);
+    
+    -webkit-backdrop-filter: blur(2px) saturate(180%);
+   
+  }
+  #card-toc .card-widget{
+
+  background:rgba(255,255,255,0.4)!important;
+  }
+  /* TOC 项 */
+  #aside-content #card-toc .toc-item .toc-link {
+    color:#504e4e!important;
+  }
+  
+  /* TOC 激活项 */
+  #aside-content #card-toc .toc-item.active .toc-link {
+    color:#121212 !important;
+    
+    background:rgba(255,255,255,0.5)!important;
+ 
+  }
+  
+  /* TOC 悬停 */
+  #aside-content #card-toc .toc-item .toc-link:hover {
+    color:#121212 !important;
+   background:rgba(255,255,255,0.5)!important;
+ 
+  }
+  
+  #post{
+   background:rgba(255,255,255,0.45)!important;
+ 
+  }
+  #recent-posts .recent-post-item > .recent-post-info > .article-title {
+    color: #121212!important;}
+  #recent-posts .recent-post-item > .recent-post-info > .article-meta-wrap{
+    color: #121212!important;}
+  #recent-posts .recent-post-item > .recent-post-info > .post-meta-date {
+    color: #121212!important;}
+  #recent-posts .recent-post-item > .recent-post-info > .content {
+    color: #121212!important;}
+  /* 卡片背景 */
+  #recent-posts .recent-post-item {
+  border:1px solid #bbbab175;
+  background: rgba(255,255,255,0.5) !important;
+    backdrop-filter: blur(3px) !important;
+    -webkit-backdrop-filter: blur(1px) !important;}
+  #content-inner {
+  border:1px solid #bbbab175;
+    background-color: rgba(255,255,255,0.5) !important;
+  }
+  .container pre{
+  background: rgba(255, 255, 255,0.55) !important;
+  }
+   .card-widget {
+   color:#121212;
+   border:1px solid #bbbab175;
+     background:  rgba(255,255,255,0.5) !important;
+    backdrop-filter: blur(2px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;}
+  }
+   
+  .site-data .headline{
+  color:#121212!important;
+  }
+  .site-data .headline{
+  color:#121212!important;
+  }
+  #aside-content .aside-list > .aside-list-item .content > .title{
+  color:rgba(56,165,187)!important;}
+  
+  .site-data > a .length-num{color:rgba(56,165,187)!important;}
+
+  #aside-content .card-archives ul.card-archive-list > .card-archive-list-item a span{
+  color:#504e4e!important;}
+
+  .card-recent-post .aside-list .no-cover .title,.card-recent-post .aside-list .no-cover time{
+  color:#121212!important;}
+
+  #aside-content .card-categories ul.card-category-list > .card-category-list-item a span{
+  color:#504e4e!important;}
+  /* 归档页面卡片样式 */
+  #archive{
+  background:rgba(255,255,255,0.3);
+ 
+  color:#504e4e!important;
+  border:1px solid #bbbab175;
+  }
+  #archive .article-sort-item-title{color:#504e4e!important;}
+  
+  
+  /* 分类页面卡片样式 */
+  #page{
+  background: rgba(255,255,255,0.5);
+  border:1px solid #bbbab175;
+  backdrop-filter: blur(5px) !important;
+  color:#504e4e!important;
+  }
+
+  /* 标签页面卡片样式 */
+  #tag{
+  border:1px solid #bbbab175;
+  backdrop-filter: blur(5px) !important;
+  background: rgba(255,255,255,0.5);
+  color:#504e4e!important;
+  }
+  #nav {
+    background: rgba(255, 255, 255, 0.1);
+    font-family: 'Georgia', 'Times New Roman', 'Songti SC', serif;
+    
+  }
+   #footer {
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(2px) saturate(180%);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    color: #333;
+    margin-top:30px;
+  }
+  
+ 
+
+  .footer-nav {
+    font-size: 14px;
+    margin: 20px 0;
+  }
+  .footer-nav a {
+    color: #666;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+  }
+  .footer-nav a:hover {
+    color: #3498db;
+    text-decoration: underline;
+  }
+</style>
+<meta name="generator" content="Hexo 7.3.0"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/project/images/bg1.jpeg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/project/images/avatar.jpg" onerror="this.onerror=null;this.src='/project/images/error/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/project/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/project/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/project/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/project/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/project/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/project/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/project/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/project/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/project/comments/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/project/images/cover.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/project/"><span class="site-name">MShBlog</span></a><a class="nav-page-title" href="/project/"><span class="site-name">js相关题目</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/project/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/project/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/project/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/project/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/project/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/project/comments/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">js相关题目</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-02-22T08:48:54.000Z" title="发表于 2026-02-22 16:48:54">2026-02-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-02-22T12:12:20.714Z" title="更新于 2026-02-22 20:12:20">2026-02-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/project/categories/javascript/">javascript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h3 id="1-随机展示已经写好的祝福语"><a href="#1-随机展示已经写好的祝福语" class="headerlink" title="1.随机展示已经写好的祝福语"></a>1.随机展示已经写好的祝福语</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">*&#123;</span><br><span class="line"> 			padding: 0;</span><br><span class="line"> 			margin: 0;</span><br><span class="line">      box-sizing: border-box;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		body&#123;</span><br><span class="line"> 			background: #f5f5f5;</span><br><span class="line"> 		&#125;</span><br><span class="line">    #main&#123;</span><br><span class="line"> 		width: 440px;</span><br><span class="line"> 		margin: 30px auto;</span><br><span class="line"> 		position: relative;</span><br><span class="line"> 		height: 450px;</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line"> 		.tabs&#123;</span><br><span class="line"> 			width: 440px;</span><br><span class="line"> 			height: 50px;</span><br><span class="line"> 			line-height: 50px;</span><br><span class="line"> 			display: flex;</span><br><span class="line"> 			/* list-style: none; */</span><br><span class="line"> 			/* text-align: left; */</span><br><span class="line"> 			/* margin: 0; */</span><br><span class="line"> 			/* padding: 0; */</span><br><span class="line"> 			margin-bottom: -1px;</span><br><span class="line"> 			position: absolute;</span><br><span class="line"> 			top: 0;</span><br><span class="line"> 			left: 0;</span><br><span class="line"> 			z-index: 999;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		.tabs div &#123;</span><br><span class="line"> 			text-align: center;</span><br><span class="line"> 			cursor: pointer;</span><br><span class="line"> 			width: 110px;</span><br><span class="line"> 		&#125;</span><br><span class="line"> </span><br><span class="line"> 		#content&#123;</span><br><span class="line"> 			position: absolute;</span><br><span class="line"> 			width: 440px;</span><br><span class="line"> 			height: 400px;</span><br><span class="line"> 			overflow: hidden;</span><br><span class="line"> 			margin: 49px auto;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		#content div&#123;</span><br><span class="line"> 			position: absolute;</span><br><span class="line">      width: 440px;</span><br><span class="line">      height: 400px;</span><br><span class="line">      overflow: hidden;</span><br><span class="line">      background-color: white;</span><br><span class="line">      border: 1px solid #dddddd;</span><br><span class="line">      padding: 20px 30px;</span><br><span class="line">      text-align: center;</span><br><span class="line"> 		&#125;</span><br><span class="line">    #content img&#123;</span><br><span class="line">      display: inline-block;</span><br><span class="line">      max-height: 240px;</span><br><span class="line">      margin: 10px auto;</span><br><span class="line">    &#125;</span><br><span class="line">    #content p&#123;</span><br><span class="line">      word-break: break-all;</span><br><span class="line">      text-align: left;</span><br><span class="line">      padding: 20px 0 10px 0;</span><br><span class="line">    &#125;</span><br><span class="line"> 		.active&#123;</span><br><span class="line"> 			z-index: 99;</span><br><span class="line">      background: white;</span><br><span class="line">      border: 1px solid #dddddd;</span><br><span class="line">      border-bottom: none;</span><br><span class="line"> 		&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line"> 	&lt;div class=&quot;card-name&quot;&gt;新年贺卡&lt;/div&gt;</span><br><span class="line"> 	&lt;div class=&quot;card&quot; id=&quot;card&quot;&gt;</span><br><span class="line"> 		&lt;p id=&quot;greeting-display&quot;&gt;&lt;/p&gt;</span><br><span class="line"> 	&lt;/div&gt;</span><br><span class="line"> 	&lt;button id=&quot;btn&quot;&gt;书写贺卡&lt;/button&gt;</span><br><span class="line"></span><br><span class="line"> 	&lt;script src=&quot;./index.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">//index.js</span><br><span class="line">document.addEventListener(&#x27;DOMContentLoaded&#x27;,function()&#123;</span><br><span class="line">  const greetingDisplay = document.getElementById(&quot;greeting-display&quot;)</span><br><span class="line"> 	const btn = document.getElementById(&quot;btn&quot;)</span><br><span class="line"> 	// 点击开始书写按钮</span><br><span class="line"> 	btn.addEventListener(&quot;click&quot;, () =&gt; &#123;</span><br><span class="line"> 		show(greetingDisplay)</span><br><span class="line"> 	&#125;)</span><br><span class="line">&#125;)</span><br><span class="line">const greetings = [</span><br><span class="line"> 	&quot;新年快乐!&quot;,</span><br><span class="line"> 	&quot;接受我新春的祝愿,祝你平安幸福&quot;,</span><br><span class="line"> 	&quot;祝你新年快乐,洋洋得意!&quot;,</span><br><span class="line"> 	&quot;新的一年,新的开始;心的祝福,新的起点!&quot;,</span><br><span class="line"> 	&quot;新年好!祝新年心情好,身体好,一切顺心!&quot;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">// 随机数函数 从 greetings 随机取一个值并返回</span><br><span class="line">function writeGreeting() &#123;</span><br><span class="line"> 	// TODO 带补充代码</span><br><span class="line"> 	return greetings[Math.floor(Math.random()*greetings.length)]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * @param &#123;*&#125; greetingDisplay  要显示内容的dom元素</span><br><span class="line"> */</span><br><span class="line">//  show 将 writeGreeting 函数中返回的内容显示在 greetingDisplay 元素中</span><br><span class="line">function show(greetingDisplay) &#123;</span><br><span class="line"> 	// TODO 待补充代码</span><br><span class="line"> 	greetingDisplay.innerHTML=writeGreeting()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.exports = &#123; show, writeGreeting &#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="生成随机数"><a href="#生成随机数" class="headerlink" title="生成随机数"></a>生成随机数</h2><ol>
+<li><p>生成 [min, max) 之间的随机整数（包含min，不包含max）<br>function getRandomIntInRange(min, max) {<br>  return <strong>Math.floor(Math.random() * (max - min)) + min;</strong><br>}</p>
+</li>
+<li><p>生成 [min, max] 之间的随机整数（包含min和max）<br>function getRandomIntInclusive(min, max) {<br>  return <strong>Math.floor(Math.random() * (max - min + 1)) + min;</strong><br>}</p>
+</li>
+</ol>
+<p>&#x2F;&#x2F; 示例：生成1到10（含）的随机整数<br>const diceRoll &#x3D; Math.floor(Math.random() * 10) + 1;<br>console.log(diceRoll); &#x2F;&#x2F; 结果可能是 1, 2, …, 10</p>
+<p>Math.random()：返回一个介于 0(包含) 和 1(不包含) 之间的伪随机浮点数。<br>Math.floor()：向下取整，舍弃小数部分。<br>因此 **Math.floor(Math.random() * n)**能将 [0, 1)的随机数映射到 [0, n-1]的整数范围。</p>
+<ol start="3">
+<li>生成指定数目和范围的不重复随机数<br>const getRandomNum &#x3D; function(min,max,countNum){<br>    var arr &#x3D; [];<br>    &#x2F;&#x2F; 使用Set来确保不重复<br>    let set &#x3D; new Set();</li>
+</ol>
+<p> <br>    &#x2F;&#x2F; 当Set中的元素数量小于所需数量时继续生成<br>    while(<strong>set.size</strong> &lt; countNum) {<br>        &#x2F;&#x2F; 生成 min~max 范围的随机整数<br>        let randomNum &#x3D; Math.floor(Math.random() * (max - min + 1)) + min;<br>        <strong>set.add</strong>(randomNum);<br>    }<br> <br>    &#x2F;&#x2F; 将Set转换为数组<br>    <strong>arr &#x3D; Array.from(set)</strong>;<br>    return arr;<br>}<br>module.exports &#x3D; getRandomNum; &#x2F;&#x2F;请勿删除</p>
+<ol start="4">
+<li><p>洗牌算法<br>从数组末尾开始，随机选择一个位置（包括当前位置）的元素与当前元素交换，逐步向前遍历。<br>时间复杂度：O(n)，空间复杂度：O(1)（原地打乱）。</p>
+</li>
+<li><p>多媒体与娱乐<br>音乐播放器：随机播放歌单，避免重复模式。<br>const playlist &#x3D; [“歌曲A”, “歌曲B”, “歌曲C”, “歌曲D”];<br>const shuffledPlaylist &#x3D; fisherYatesShuffle([…playlist]);<br>&#x2F;&#x2F; 随机播放顺序<br>视频&#x2F;短片推荐：打乱推荐内容顺序，增加多样性。<br>播客节目：随机排列节目列表，提供新鲜感。</p>
+</li>
+<li><p>游戏开发<br>扑克牌&#x2F;卡牌游戏：洗牌是核心操作。<br>&#x2F;&#x2F; 斗地主发牌前洗牌<br>const deck &#x3D; […Array(54).keys()]; &#x2F;&#x2F; 54张牌（含大小王）<br>const shuffled &#x3D; fisherYatesShuffle(deck);<br>const player1 &#x3D; shuffled.slice(0, 17); &#x2F;&#x2F; 发牌</p>
+</li>
+</ol>
+<p>步骤（从后向前）：<br>设数组长度为 n。<br>从 i &#x3D; n-1开始递减至 1：<br>生成随机索引 j，满足 0 ≤ j ≤ i。<br>交换 arr[i]和 arr[j]。<br>完成打乱。<br>function fisherYatesShuffle(arr) {<br>    const n &#x3D; arr.length;<br>    for (let i &#x3D; n - 1; i &gt; 0; i–) {<br>        const j &#x3D; Math.floor(Math.random() * (i + 1)); &#x2F;&#x2F; 随机选择 0 到 i 的索引<br>        [arr[i], arr[j]] &#x3D; [arr[j], arr[i]]; &#x2F;&#x2F; 交换元素<br>    }<br>    return arr;<br>}</p>
+<p>&#x2F;&#x2F; 使用示例<br>const cards &#x3D; [1, 2, 3, 4, 5];<br>console.log(fisherYatesShuffle([…cards])); &#x2F;&#x2F; 每次运行得到随机顺序</p>
+<p>使用洗牌算法（Fisher-Yates shuffle）保证高效获取不重复随机数</p>
+<h2 id="当用户输入的位数大于-3-位数时，需要将上述输入的金额字符串，使用千分位（即，用英文逗号-“-”-）分隔处理"><a href="#当用户输入的位数大于-3-位数时，需要将上述输入的金额字符串，使用千分位（即，用英文逗号-“-”-）分隔处理" class="headerlink" title="当用户输入的位数大于 3 位数时，需要将上述输入的金额字符串，使用千分位（即，用英文逗号 “,” ）分隔处理"></a>当用户输入的位数大于 3 位数时，需要将上述输入的金额字符串，使用千分位（即，用英文逗号 “,” ）分隔处理</h2><p>function formatNum(input){<br>  const cleanStr&#x3D;input.replace(&#x2F;[^\d.-]&#x2F;g,’’)<br>  if(!cleanStr||cleanStr&#x3D;&#x3D;&#x3D;’,’||cleanStr&#x3D;&#x3D;&#x3D;’-‘)return ‘’<br>  const num&#x3D;Number(cleanStr)<br>  if(isNaN(num))return ‘’<br>  return num.toLocaleString()<br>}<br>1234567.89—&gt;1,234,567.89</p>
+<p> div.innerHTML &#x3D; formatNum(someInputValue);</p>
+<h2 id="验证密码强度"><a href="#验证密码强度" class="headerlink" title="验证密码强度"></a>验证密码强度</h2><p>在密码框中输入密码。<br>点击“验证”按钮。<br>输出密码强度等级：低、中、高。<br>而密码强度的等级在上图中也给出了划分。具体如下：<br>低：<br>密码必须大于 8 个字符。<br>中（在满足低强度要求的前提下，需要满足以下需求）：<br>至少需要一个小写字母。<br>至少需要一个数字。<br>高（在满足中强度要求的前提下，需要满足以下需求）：<br>至少需要一个大写字母。<br>至少需要一个（除数字和字母外的）特殊字符。<br>需要注意的是，当密码小于等于 8 个字符的情况下点击“验证”按钮后，需要在强度等级中输出“无效”的结果。</p>
+<p>document.querySelector(‘button’).addEventListener(‘click’,()&#x3D;&gt;{<br>    const pwd&#x3D;document.querySelector(‘input’).value<br> <br>    &#x2F;&#x2F; 首先检查长度（题目要求：小于等于8个字符为无效）<br>    if (pwd.length &lt;&#x3D; 8) {<br>        document.querySelector(‘.re’).innerHTML &#x3D; ‘无效’;<br>        return;<br>    }</p>
+<p>    &#x2F;&#x2F; 检查各种字符类型<br>    const hasLowCase &#x3D; &#x2F;[a-z]&#x2F;.test(pwd);        &#x2F;&#x2F; 小写字母<br>    const hasUpperCase &#x3D; &#x2F;[A-Z]&#x2F;.test(pwd);      &#x2F;&#x2F; 大写字母<br>    const hasNumber &#x3D; &#x2F;\d&#x2F;.test(pwd);            &#x2F;&#x2F; 数字<br>    const hasSpecialCase &#x3D; &#x2F;[^0-9a-zA-Z]&#x2F;.test(pwd); &#x2F;&#x2F; 特殊字符<br> <br>    &#x2F;&#x2F; 强度判断（从高到低检查）<br>    if (hasLowCase &amp;&amp; hasNumber &amp;&amp; hasUpperCase &amp;&amp; hasSpecialCase) {<br>        &#x2F;&#x2F; 高强度：满足所有条件<br>        document.querySelector(‘.re’).innerHTML &#x3D; ‘高’;<br>    } else if (hasLowCase &amp;&amp; hasNumber) {<br>        &#x2F;&#x2F; 中强度：至少小写字母和数字<br>        document.querySelector(‘.re’).innerHTML &#x3D; ‘中’;<br>    } else {<br>        &#x2F;&#x2F; 低强度：仅满足长度&gt;8<br>        document.querySelector(‘.re’).innerHTML &#x3D; ‘低’;<br>    }<br>})</p>
+<h2 id="数据转换"><a href="#数据转换" class="headerlink" title="数据转换"></a>数据转换</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  new Vue(&#123;</span><br><span class="line">    el: &#x27;#app&#x27;,</span><br><span class="line">    data: function() &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        tableData: [],</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    async mounted() &#123;</span><br><span class="line">      try &#123;</span><br><span class="line">        // 获取数据</span><br><span class="line">        let res = await axios.get(&#x27;fetchTableData.json&#x27;);</span><br><span class="line">        this.tableData = res.data.data;</span><br><span class="line">        console.log(this.tableData);      </span><br><span class="line">        // 格式化数据</span><br><span class="line">        this.tableData.forEach(element =&gt; &#123;</span><br><span class="line">          element.sex = element.sex == 1 ? &#x27;男&#x27; : &#x27;女&#x27;;</span><br><span class="line">          element.vip = element.vip == 1 ? &#x27;是&#x27; : &#x27;否&#x27;;       </span><br><span class="line">          // 格式化日期：YYYYMMDD → YYYY-MM-DD</span><br><span class="line"></span><br><span class="line">          if (element.datetime&amp;&amp;element.datetime.length &gt;= 8) &#123;</span><br><span class="line"></span><br><span class="line">            element.datetime = element.datetime.slice(0,4) + &#x27;-&#x27; + </span><br><span class="line"></span><br><span class="line">                               element.datetime.slice(4,6) + &#x27;-&#x27; + </span><br><span class="line"></span><br><span class="line">                               element.datetime.slice(6,8);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">&lt;!--  element.datetime.substring(0,4) + &#x27;-&#x27; + </span><br><span class="line"></span><br><span class="line">      element.datetime.substring(4,6) + &#x27;-&#x27; + </span><br><span class="line"></span><br><span class="line">      element.datetime.substring(6,8);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;); </span><br><span class="line"></span><br><span class="line">// 或使用正则表达式（更灵活）</span><br><span class="line">dateStr.replace(/^(\d&#123;4&#125;)(\d&#123;2&#125;)(\d&#123;2&#125;)$/, &#x27;$1-$2-$3&#x27;);</span><br><span class="line"></span><br><span class="line">--&gt;</span><br><span class="line"></span><br><span class="line">      &#125; catch (error) &#123;</span><br><span class="line">        console.error(&#x27;获取数据失败:&#x27;, error);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="slice-substring"><a href="#slice-substring" class="headerlink" title="slice substring"></a>slice substring</h2><ol>
+<li><p>str.slice(start, end)<br>参数可以为负数，表示从字符串末尾开始计算<br>const str &#x3D; “Hello World”;<br>console.log(str.slice(0, 5));     &#x2F;&#x2F; “Hello” - 索引0到4<br>console.log(str.slice(6));        &#x2F;&#x2F; “World” - 从索引6到末尾<br>console.log(str.slice(-5));       &#x2F;&#x2F; “World” - 从末尾开始数5个字符<br>console.log(str.slice(0, -6));    &#x2F;&#x2F; “Hello” - 从0开始到倒数第6个（不包括）</p>
+</li>
+<li><p>str.substring(start, end)<br>const str &#x3D; “Hello World”;</p>
+</li>
+</ol>
+<p>console.log(str.substring(0, 5));     &#x2F;&#x2F; “Hello” - 索引0到4<br>console.log(str.substring(6));        &#x2F;&#x2F; “World” - 从索引6到末尾<br>console.log(str.substring(5, 0));     &#x2F;&#x2F; “Hello” - 自动交换参数<br>console.log(str.substring(-3, 5));    &#x2F;&#x2F; “Hello” - 负数被当作0<br>console.log(str.substring(0, -3));    &#x2F;&#x2F; “” - 第二个参数负数为0</p>
+<p>推荐使用 slice()：<br>&#x2F;&#x2F; 提取文件扩展名<br>const filename &#x3D; “image.jpg”;<br>const ext &#x3D; filename.slice(-3);  &#x2F;&#x2F; “jpg”</p>
+<p>&#x2F;&#x2F; 提取最后几个字符<br>const id &#x3D; “USER_12345”;<br>const num &#x3D; id.slice(-5);  &#x2F;&#x2F; “12345”<br>使用 substring()：<br>&#x2F;&#x2F; 提取固定位置的子串<br>const phone &#x3D; “13812345678”;<br>const prefix &#x3D; phone.substring(0, 3);  &#x2F;&#x2F; “138”</p>
+<p>&#x2F;&#x2F; 安全提取，不确定参数顺序时<br>const text &#x3D; “Hello”;<br>console.log(text.substring(3, 0));  &#x2F;&#x2F; “Hel”（自动交换）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/ 整个字符串必须完全匹配</span><br><span class="line">const regex3 = /^abc$/;  // 字符串必须是&quot;abc&quot;，不多不少</span><br><span class="line"></span><br><span class="line">console.log(/^abc$/.test(&quot;abc&quot;));    // true - 完全匹配</span><br><span class="line">console.log(/^abc$/.test(&quot;abcdef&quot;)); // false - 多了内容</span><br><span class="line">console.log(/^abc$/.test(&quot;123abc&quot;)); // false - 多了内容</span><br><span class="line">// 使用 ^ 和 $ - 严格匹配整个字符串就是8位数字</span><br><span class="line">/^(\d&#123;4&#125;)(\d&#123;2&#125;)(\d&#123;2&#125;)$/</span><br><span class="line">// 含义：从头到尾必须是 4位数字 + 2位数字 + 2位数字</span><br><span class="line">[^...]：字符集内部的 ^表示 &quot;非&quot;，匹配除指定字符外的任何字符</span><br><span class="line">^...：字符集外部的 ^表示 &quot;字符串开始&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="url参数解析高亮文本内容"><a href="#url参数解析高亮文本内容" class="headerlink" title="url参数解析高亮文本内容"></a>url参数解析高亮文本内容</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">  &lt;title&gt;URL 参数解析并高亮文本内容&lt;/title&gt;</span><br><span class="line">  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://labfile.oss.aliyuncs.com/courses/9203/style10.css&quot;&gt;</span><br><span class="line">  &lt;style&gt;</span><br><span class="line">    /* 添加高亮样式 */</span><br><span class="line">    em &#123;</span><br><span class="line">      background-color: yellow;</span><br><span class="line">      font-style: normal;</span><br><span class="line">      color: #333;</span><br><span class="line">      font-weight: bold;</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div class=&quot;search&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;input-box&quot;&gt;</span><br><span class="line">      &lt;input type=&quot;text&quot; width=&quot;546px&quot; name=&quot;search-input&quot; height=&quot;45px&quot; </span><br><span class="line">             value=&quot;https://lanqiao.cn/s?wd=蓝桥云课&amp;d=20220712&amp;from=wx&quot; /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;search-box&quot;&gt;</span><br><span class="line">      &lt;input type=&quot;button&quot; width=&quot;110px&quot; height=&quot;45px&quot; value=&quot;搜索&quot; /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;main class=&quot;main-container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;item&quot;&gt;</span><br><span class="line">      &lt;a href=&quot;#&quot;&gt;&lt;h3 class=&quot;c-title&quot;&gt;蓝桥云课楼+课程_实验楼&lt;/h3&gt;&lt;/a&gt;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;div class=&quot;c-gap-top-small&quot;&gt;</span><br><span class="line">          &lt;span class=&quot;content-right&quot;&gt;蓝桥云课是国内领先的IT在线编程及在线实训学习平台,专业导师提供精选的实践项目,创新的技术使得学习者无需配置繁琐的本地环境,随时在线流畅使用。实验楼，以就业为导向，提供编程&lt;/span&gt;</span><br><span class="line">          &lt;div class=&quot;c-row&quot;&gt;</span><br><span class="line">              &lt;span class=&quot;c-color-gray&quot; aria-hidden=&quot;true&quot;&gt;www.shiyanlou.com/louplus/&lt;/span&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;  </span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;div class=&quot;item&quot;&gt;</span><br><span class="line">      &lt;a href=&quot;#&quot;&gt;&lt;h3 class=&quot;c-title&quot;&gt;蓝桥云课的个人空间_哔哩哔哩_bilibili&lt;/h3&gt;&lt;/a&gt;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;div class=&quot;c-gap-top-small&quot;&gt;</span><br><span class="line">          &lt;span class=&quot;content-right&quot;&gt;做实验,学编程,尽在蓝桥云课~关注公众号领福利! 发消息 主页动态投稿999+合集和列表0 关注数 7 粉丝数 1.7万 代表作 01:17:01 【公开课】实验楼&lt;/span&gt;</span><br><span class="line">          &lt;div class=&quot;c-row&quot;&gt;</span><br><span class="line">              &lt;span class=&quot;c-color-gray&quot; aria-hidden=&quot;true&quot;&gt;bilibili&lt;/span&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;  </span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;item&quot;&gt;</span><br><span class="line">      &lt;a href=&quot;#&quot;&gt;&lt;h3 class=&quot;c-title&quot;&gt;精选项目课程_IT热门课程_蓝桥云课课程&lt;/h3&gt;&lt;/a&gt;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;div class=&quot;c-gap-top-small&quot;&gt;</span><br><span class="line">          &lt;span class=&quot;content-right&quot;&gt;蓝桥云课是国内领先的IT在线编程及在线实训学习平台,专业导师提供精选的实践项目,创新的技术使得学习者无需配置繁琐的本地环境,随时在线流畅使用。以就业为导向, 提供编程、运维、测试、云计算&lt;/span&gt;</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">              &lt;span class=&quot;c-color-gray&quot; aria-hidden=&quot;true&quot;&gt;lanqiao&lt;/span&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;  </span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/main&gt;</span><br><span class="line"></span><br><span class="line">  &lt;script&gt;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">const bd=document.querySelector(&#x27;.main-container&#x27;)</span><br><span class="line">const text=document.querySelector(&#x27;.input-box&gt;input&#x27;)</span><br><span class="line">const initbd=bd.innerHTML</span><br><span class="line">document.querySelector(&#x27;.search-box&gt;input&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;&#123;</span><br><span class="line">bd.innerHTML=initbd</span><br><span class="line">const url=text.value</span><br><span class="line">const match=url.match(/[?&amp;]wd=([^&amp;]*)/)</span><br><span class="line">if(match)&#123;</span><br><span class="line">  searchKW=decodeURIComponent(match[1])</span><br><span class="line">  if(searchKW&amp;&amp;searchKW.trim()!==&#x27;&#x27;)&#123;</span><br><span class="line">    const escaped=searchKW.replace(/[.*+?^$&#123;&#125;()|[\]\\]/g,&#x27;\\$&amp;&#x27;)</span><br><span class="line">    const regex=new RegExp(escaped,&#x27;g&#x27;)</span><br><span class="line">    bd.innerHTML= bd.innerHTML.replace(regex,&#x27;&lt;em&gt;$&amp;&lt;/em&gt;&#x27;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  const match &#x3D; url.match(&#x2F;[?&amp;]wd&#x3D;([^&amp;]*)&#x2F;)<br>&#x2F;&#x2F; match[0]: 整个匹配的字符串（如 “?wd&#x3D;JavaScript”）<br>&#x2F;&#x2F; match[1]: 第一个括号捕获的内容（如 “JavaScript”）<br>&#x2F;&#x2F; match[2]: 第二个括号捕获的内容（如果有更多括号）</p>
+<p>(        )    ← 捕获组开始<br> [^&amp;]    ← 匹配”除了&amp;以外的任何字符”<br>    *     ← 匹配0次或多次<br>match[1]：数组索引，获取括号捕获的第1个内容<br>([^&amp;]*)：括号捕获，^在里面是”非”， <em>是”多次”<br>$&amp;：在替换时代表”整个匹配的文本”<br>const url &#x3D; “<a target="_blank" rel="noopener" href="http://example.com/?wd=%E7%BC%96%E7%A8%8B&lang=zh">http://example.com?wd=编程&amp;lang=zh</a>“<br>const match &#x3D; url.match(&#x2F;[?&amp;]wd&#x3D;([^&amp;]</em>)&#x2F;)</p>
+<p>&#x2F;&#x2F; match[1] &#x3D; “%E7%BC%96%E7%A8%8B”（URL编码的”编程”）<br>const keyword &#x3D; decodeURIComponent(match[1])  &#x2F;&#x2F; “编程”</p>
+<p>const content &#x3D; “学习编程很有趣”<br>&#x2F;&#x2F; $&amp; 代表匹配到的”编程”<br>const result &#x3D; content.replace(&#x2F;编程&#x2F;, ‘<em>$&amp;</em>‘)<br>&#x2F;&#x2F; 结果: “学习<em>编程</em>很有趣”</p>
+<!-- 
+搜索高亮工具，从URL中提取搜索关键词，然后在页面内容中高亮显示所有匹配的关键词。主要用于在页面上直观展示搜索结果的上下文位置。
+元素获取与初始化：
+获取页面主容器 .main-container并保存为 bd
+获取输入框中的内容并保存为 text
+保存主容器的原始HTML内容为 initbd，用于后续重置
+
+为搜索按钮/输入框添加点击事件监听器
+使用箭头函数定义事件处理函数
+每次搜索前恢复主容器的原始HTML内容
+避免之前的高亮标记影响新搜索
+
+从输入框获取URL
+使用正则表达式提取URL中的搜索关键词（wd=参数）
+正则说明：
+[?&]wd=：匹配以?wd=或&wd=开头的参数
+([^&]*)：捕获组，匹配除了&以外的所有字符
+如果成功匹配到关键词参数
+使用decodeURIComponent()解码URL编码的关键词
+
+验证关键词非空且不是纯空格
+对关键词进行正则转义，处理特殊字符
+
+转义规则：将正则特殊字符前加上反斜杠
+创建全局匹配的正则表达式
+将匹配到的所有关键词用<em>标签包裹
+$&表示匹配到的完整内容
+
+潜在优化点：
+添加防抖处理避免频繁触发
+可以考虑区分大小写匹配选项
+可以添加高亮动画效果
+考虑对HTML标签内文本进行安全处理
+ -->
+
+<h2 id="回文字符串"><a href="#回文字符串" class="headerlink" title="回文字符串"></a>回文字符串</h2><p>function huiwen(str){<br>  if(type of str!&#x3D;&#x3D;’string’)return false<br>  if(str.length&lt;1)return false<br>  let left&#x3D;0;let right&#x3D;str.length-1<br>  while(left&lt;&#x3D;right){<br>    if(str[left]!&#x3D;&#x3D;str[right]){<br>      return false<br>    }<br>    left++;right–;<br>  }<br>  return true<br>}</p>
+<!-- return str===str.split('').reverse().join('') -->
+
+<h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>登录、发短信等按钮避免用户点击太快，以致于发送了多次请求。<br>调整浏览器窗口大小时，resize 次数过于频繁，造成计算过多。<br>文本编辑器实时保存。<br>上面这些场景在实际交互中会不断地调用绑定在事件（如：浏览器的 resize、scroll、keypress、mousemove 等）上的回调函数，极大地浪费资源，降低前端性能。为了优化体验，需要对这类事件进行调用次数的限制，对此我们就可以采用防抖（debounce）的方式来减少调用频率。</p>
+<p>来看一下防抖的定义：n 秒后再执行某个函数，若该函数在 n 秒内被重复触发，则重新计时。<br>防抖函数的核心思想是：在短时间内多次触发同一事件时，只执行最后一次，适用于输入框搜索、窗口resize等场景。存储定时器ID：使用闭包保存 timeout<br>清除旧定时器：每次调用都清除之前的等待<br>设置新定时器：延迟执行原始函数<br>保持上下文：使用 apply()确保 this正确</p>
+<p>function debounce(fn,delay&#x3D;0){<br>  let timeout&#x3D;null;<br>  return function(…args){<br>    clearTimeout(timeout)<br>    timeout&#x3D;setTimeout(()&#x3D;&gt;{<br>      fn.apply(this,args)<br>    },delay)<br>  }<br>}</p>
+<p>fn:需要防抖处理的原始函数<br>delay:防抖延迟时间<br>timeout用于保存 setTimeout返回的计时器ID<br>由于闭包，每次调用返回的函数都能访问这个变量<br>这个变量是防抖功能的核心<br>return function(…args) {<br>返回一个新的函数（防抖版本）<br>使用扩展运算符 …args接收任意数量的参数<br>这个函数就是用户实际调用的防抖函数<br>关键步骤：每次调用防抖函数时，都清除之前设置的定时器<br>这是实现”防抖”的核心：取消上一次未执行的调用<br>clearTimeout(null)是安全的，不会报错<br>创建一个新的定时器，延迟 delay毫秒后执行<br>fn.apply(this, args):<br>apply()方法调用原始函数<br>this保持了调用防抖函数时的上下文<br>args是传递给防抖函数的参数</p>
+<p>&#x2F;&#x2F; 示例：输入框搜索</p>
+<ol>
+<li>搜索框输入<br>const searchInput &#x3D; document.getElementById(‘search’);<br>const debouncedSearch &#x3D; debounce(searchAPI, 300);</li>
+</ol>
+<p>searchInput.addEventListener(‘input’, (e) &#x3D;&gt; {<br>  debouncedSearch(e.target.value);<br>});<br>2. 窗口大小调整<br>const handleResize &#x3D; debounce(() &#x3D;&gt; {<br>  console.log(‘窗口大小:’, window.innerWidth, window.innerHeight);<br>}, 250);</p>
+<p>window.addEventListener(‘resize’, handleResize);</p>
+<ol start="3">
+<li>按钮防重复点击<br>const handleSubmit &#x3D; debounce(() &#x3D;&gt; {<br>  &#x2F;&#x2F; 提交表单逻辑<br>  console.log(‘提交表单’);<br>}, 1000);</li>
+</ol>
+<p>submitBtn.addEventListener(‘click’, handleSubmit);</p>
+<p>[<br>  {<br>    name: “潇然”,<br>    class: 2, &#x2F;&#x2F; 班级<br>    math: 110, &#x2F;&#x2F; 数学成绩<br>    language: 92, &#x2F;&#x2F; 语文成绩<br>    english: 114, &#x2F;&#x2F; 英语成绩<br>    physics: 56, &#x2F;&#x2F; 物理成绩<br>    chemistry: 74, &#x2F;&#x2F; 化学成绩<br>  },<br>  {<br>    name: “张三”,<br>    class: 1,<br>    math: 100,<br>    language: 80,<br>    english: 60,<br>    physics: 80,<br>    chemistry: 60,<br>  },<br>  &#x2F;&#x2F; …<br>];<br>接收所有学生成绩的数组。<br>将学生按不同的班级分组，且班级内按照总分降序排列（如果学生 A、B 的总分相同，则按照学生在原数据中的先后顺序进行排列，不要在学生成绩的数据对象中添加多余的字段，确保排序后的对象和排序前一致）。<br>返回分班排序后的对象（如果传入的学生成绩列表为空，则返回一个空对象）<br>&#x2F;&#x2F; 返回的结果对象：<br>&#x2F;&#x2F; key 是班级号，同一个班级中学生成绩降序排列<br>{<br>  1: [<br>    {<br>      name: “潇然”,<br>      class: 1,<br>      math: 110,<br>      language: 92,<br>      english: 114,<br>      physics: 56,<br>      chemistry: 74,<br>    },<br>    {<br>      name: “张三”,<br>      class: 1,<br>      math: 10,<br>      language: 8,<br>      english: 60,<br>      physics: 8,<br>      chemistry: 60,<br>    },<br>    &#x2F;&#x2F; …<br>  ],<br>  2: [<br>    &#x2F;&#x2F; …<br>  ],<br>};</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">function orderStudentGrade(students) &#123;</span><br><span class="line">  // TODO: 在这里写入具体的实现逻辑</span><br><span class="line">  // 将学生的成绩按班级分组，同一班级中按照总分从高到底排序</span><br><span class="line">  if(students.length===0||!students)&#123;</span><br><span class="line">    return &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  const res=&#123;&#125;</span><br><span class="line">  students.forEach((student)=&gt;&#123;</span><br><span class="line">if(!res[student.class])&#123;res[student.class]=[]&#125;</span><br><span class="line">res[student.class].push(student)</span><br><span class="line">  &#125;)</span><br><span class="line">  for(className in res)&#123;</span><br><span class="line">    const Score=res[className].map((student,index)=&gt;(&#123;</span><br><span class="line">      student,  // 原学生对象</span><br><span class="line">      totalScore: student.math + student.language + student.english + </span><br><span class="line">                  student.physics + student.chemistry, </span><br><span class="line">      originalOrder: index </span><br><span class="line">  &#125;))</span><br><span class="line">  Score.sort((a,b)=&gt;&#123;</span><br><span class="line">    if(a.totalScore!==b.totalScore)&#123;</span><br><span class="line">      return b.totalScore-a.totalScore</span><br><span class="line">    &#125;</span><br><span class="line">    return a.originalOrder-b.originalOrder</span><br><span class="line">  &#125;)</span><br><span class="line">    res[className]=Score.map(item=&gt;item.student)</span><br><span class="line">  &#125;</span><br><span class="line">return res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="将平铺的结构转化为树状结构："><a href="#将平铺的结构转化为树状结构：" class="headerlink" title="将平铺的结构转化为树状结构："></a>将平铺的结构转化为树状结构：</h2><p>[<br>  {<br>    id: “51”, &#x2F;&#x2F; 区域 id<br>    name: “四川省”, &#x2F;&#x2F; 区域名字<br>    pid: “0”, &#x2F;&#x2F; 区域的父级区域 id<br>  },<br>  {<br>    id: “5101”,<br>    name: “成都市”,<br>    pid: “51”, &#x2F;&#x2F; 成都的父级是四川省，所以 pid 是 51<br>  },<br>  &#x2F;&#x2F; …<br>[<br>  {<br>    id: “51”, &#x2F;&#x2F; 地址 id<br>    name: “四川省”, &#x2F;&#x2F; 地址名<br>    pid: “0”, &#x2F;&#x2F; 该地址的父节点 id<br>    children: [<br>      {<br>        id: “5101”,<br>        name: “成都市”,<br>        pid: “51”,<br>        children: [<br>          {<br>            id: “510101”,<br>            name: “市辖区”,<br>            pid: “5101”,<br>            children: [], &#x2F;&#x2F; 如果该区域节点没有子集，children 则为空数组！！！<br>          },<br>          &#x2F;&#x2F; …<br>        ],<br>      },<br>      &#x2F;&#x2F; …<br>    ],<br>  },<br>  &#x2F;&#x2F; …<br>];</p>
+<p>接收平铺的区域信息数组，并将其转化为树状结构，最终数据结构如上面介绍中所示（树状结构，且对于没有子集的叶子节点，其 children 属性设置为空数组）。<br>并且还接收一个 rootId，用于标识返回哪一个区域下面的所有节点。默认为 0 表示返回所有省份信息（在我们的示例数据中，所有省份的 pid 都为 0）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">function f(regions)&#123;</span><br><span class="line"></span><br><span class="line">if(!Array.isArray(regions)||regions.length===0)return []</span><br><span class="line">const re=[];const nodeMap=new Map()</span><br><span class="line">//用于存储键值对的集合。</span><br><span class="line">//const nodeMap = new Map()创建了一个高效的哈希表，用于存储和快速查找区域节点</span><br><span class="line"></span><br><span class="line">// 将每个区域存入Map：key=区域id，value=带children的区域对象</span><br><span class="line">regions.forEach(region=&gt;&#123;</span><br><span class="line">  if(region&amp;&amp;region.id)&#123;  </span><br><span class="line">    nodeMap.set(region.id,&#123;...region,children:[]&#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">regions.forEach(region=&gt;&#123;</span><br><span class="line">  const node=nodeMap.get(region.id)   // 1, 2, 3, 4</span><br><span class="line">  const parent=nodeMap.get(region.pid)</span><br><span class="line">  if(region.pid==rootId)&#123;re.push(node)&#125;</span><br><span class="line">  else if(parent)&#123;parent.children.push(node)&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// pid == rootId 判断是否为根节点</span><br><span class="line">// 根节点：直接放入结果数组 re</span><br><span class="line">// 非根节点：找到父节点，加入父节点的 children</span><br><span class="line">return re;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// Map 的基本用法</span><br><span class="line">const map = new Map()</span><br><span class="line"></span><br><span class="line">// 添加键值对</span><br><span class="line">map.set(&#x27;key1&#x27;, &#x27;value1&#x27;)</span><br><span class="line">map.set(&#x27;key2&#x27;, &#x27;value2&#x27;)</span><br><span class="line"></span><br><span class="line">// 获取值</span><br><span class="line">const value = map.get(&#x27;key1&#x27;)  // &#x27;value1&#x27;</span><br><span class="line"></span><br><span class="line">// 检查是否存在</span><br><span class="line">map.has(&#x27;key1&#x27;)  // true</span><br><span class="line"></span><br><span class="line">// 删除</span><br><span class="line">map.delete(&#x27;key1&#x27;)</span><br><span class="line"></span><br><span class="line">// 获取大小</span><br><span class="line">map.size  // 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="接收一个全量的地址信息以及需要查询的地址。全量地址信息是树形格式，结果形如："><a href="#接收一个全量的地址信息以及需要查询的地址。全量地址信息是树形格式，结果形如：" class="headerlink" title="接收一个全量的地址信息以及需要查询的地址。全量地址信息是树形格式，结果形如："></a>接收一个全量的地址信息以及需要查询的地址。全量地址信息是树形格式，结果形如：</h2><p>[<br>  {<br>    id: “51”, &#x2F;&#x2F; 地址 id<br>    name: “四川省”, &#x2F;&#x2F; 地址名<br>    pid: “0”, &#x2F;&#x2F; 该地址的父节点 id<br>    children: [<br>      {<br>        id: “5101”,<br>        name: “成都市”,<br>        pid: “51”,<br>        children: [<br>          {<br>            id: “510101”,<br>            name: “市辖区”,<br>            pid: “5101”,<br>            children: [],<br>          },<br>          &#x2F;&#x2F; …<br>        ],<br>      },<br>      &#x2F;&#x2F; …<br>    ],<br>  },<br>  &#x2F;&#x2F; …<br>];</p>
+<p>如果能找到具体的地址信息，则以数组形式返回它的完整行政信息，比如：<br>输入”青羊区”, 则返回 [ “四川省”, “成都市”, “青羊区” ]。<br>输入”成都市”, 则返回 [ “四川省”, “成都市” ]。<br>输入”四川省”, 则返回 [ “四川省” ]。<br>如果不存在该地址，则返回一个 null。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">function findRegion(regions, regionName) &#123;</span><br><span class="line">  const stack = [];  </span><br><span class="line">  // 初始化栈</span><br><span class="line">  regions.forEach(region =&gt; &#123;</span><br><span class="line">    stack.push(&#123;</span><br><span class="line">      node: region,</span><br><span class="line">      path: [region.name]</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">// 初始栈内容（注意：栈是后进先出）：</span><br><span class="line"></span><br><span class="line">  // 深度优先搜索</span><br><span class="line">  while (stack.length &gt; 0) &#123;</span><br><span class="line">    const &#123; node, path &#125; = stack.pop();</span><br><span class="line">    // 找到目标节点</span><br><span class="line">    if (node.name === regionName) &#123;</span><br><span class="line">      return path;</span><br><span class="line">    &#125;</span><br><span class="line">    // 如果有子节点，继续遍历</span><br><span class="line">    if (node.children) &#123;</span><br><span class="line">      for (let i = node.children.length - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">        const child = node.children[i];</span><br><span class="line">        stack.push(&#123;</span><br><span class="line">          node: child,</span><br><span class="line">          path: [...path, child.name]</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;  </span><br><span class="line">  // 遍历完所有节点都没找到，返回null</span><br><span class="line">  return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="proxy-代理"><a href="#proxy-代理" class="headerlink" title="proxy 代理"></a>proxy 代理</h2><p>在文件 age.js 中，有一个 person 对象，当它的 age 属性值改变时需要对新值做判断，将其永远控制在 0 - 150 之间。具体需求如下：<br>如果新属性值在 0 -150 之间（包含 0 和 150），则直接更新。<br>如果新属性值小于 0，则属性值更新为 0。<br>如果新属性值大于 150，则属性值更新为 150。<br>&#x2F;&#x2F; 请不要更改这个对象里面的内容<br>let person &#x3D; {<br>  age: 0,<br>};</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// 使用 Proxy 创建一个代理对象</span><br><span class="line">const personProxy = new Proxy(person, &#123;</span><br><span class="line">  set(target, property, value) &#123;</span><br><span class="line">    // 只拦截 age 属性的设置操作</span><br><span class="line">    if (property === &#x27;age&#x27;) &#123;</span><br><span class="line">      // 验证逻辑</span><br><span class="line">      if (value &lt; 0) &#123;</span><br><span class="line">        target[property] = 0;</span><br><span class="line">      &#125; else if (value &gt; 150) &#123;</span><br><span class="line">        target[property] = 150;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        target[property] = value;</span><br><span class="line">      &#125;</span><br><span class="line">      return true; // 表示设置成功</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 对于其他属性，直接设置</span><br><span class="line">    target[property] = value;</span><br><span class="line">    return true;</span><br><span class="line">  &#125;,</span><br><span class="line">  </span><br><span class="line">  get(target, property) &#123;</span><br><span class="line">    return target[property];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">module.exports = personProxy; // 注意：这里导出的是代理对象</span><br></pre></td></tr></table></figure>
+
+<h2 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h2><p>Proxy是 ES6 引入的新特性，用于创建一个对象的代理，从而可以拦截和自定义对象的基本操作（如属性读取、赋值、函数调用等）。<br>基本语法：<br>const proxy &#x3D; new Proxy(target, handler);<br>target：要代理的目标对象<br>handler：包含拦截方法的对象（称为”陷阱”或”处理器”）</p>
+<p>二、代码解析</p>
+<ol>
+<li><p>目标对象<br>let person &#x3D; {<br>  age: 0,<br>};<br>这是一个普通的对象，有初始的 age属性值为 0。</p>
+</li>
+<li><p>创建 Proxy 代理<br>const personProxy &#x3D; new Proxy(person, {<br>  &#x2F;&#x2F; handler 对象包含拦截方法<br>  set(target, property, value) {<br> &#x2F;&#x2F; 拦截属性赋值操作<br>  },</p>
+</li>
+</ol>
+<p>  get(target, property) {<br>    &#x2F;&#x2F; 拦截属性读取操作<br>  }<br>});<br>personProxy是 person的代理对象，对 personProxy的操作会被 handler 拦截。<br>3. 拦截 set操作（属性赋值）<br>set(target, property, value) {<br>  &#x2F;&#x2F; property: 要设置的属性名<br>  &#x2F;&#x2F; value: 要设置的值</p>
+<p>  if (property &#x3D;&#x3D;&#x3D; ‘age’) {<br>    &#x2F;&#x2F; 验证逻辑<br>    if (value &lt; 0) {<br>      target[property] &#x3D; 0;      &#x2F;&#x2F; 小于0 → 设为0<br>    } else if (value &gt; 150) {<br>      target[property] &#x3D; 150;    &#x2F;&#x2F; 大于150 → 设为150<br>    } else {<br>      target[property] &#x3D; value;  &#x2F;&#x2F; 0-150之间 → 正常赋值<br>    }<br>    return true; &#x2F;&#x2F; 必须返回 true 表示设置成功<br>  }</p>
+<p>  &#x2F;&#x2F; 对于其他属性，直接设置<br>  target[property] &#x3D; value;<br>  return true;<br>}</p>
+<p>当对 personProxy.age赋值时触发<br>对 age 属性进行验证和限制<br>必须返回 true表示赋值成功，返回 false会抛出 TypeError</p>
+<ol start="4">
+<li>拦截 get操作（属性读取）<br>get(target, property) {<br>  return target[property];<br>}<br>当读取 personProxy.age时触发<br>直接返回目标对象的对应属性值<br>这里没有特殊处理，只是透传</li>
+<li>导出代理对象<br>module.exports &#x3D; personProxy; &#x2F;&#x2F; 注意：这里导出的是代理对象<br>导出的是代理对象，而不是原始对象。<br>三、如何使用<br>&#x2F;&#x2F; 导入的是代理对象<br>const person &#x3D; require(‘.&#x2F;person.js’);</li>
+</ol>
+<p>&#x2F;&#x2F; 1. 正常赋值（在0-150之间）<br>person.age &#x3D; 25;<br>console.log(person.age); &#x2F;&#x2F; 25</p>
+<p>&#x2F;&#x2F; 2. 赋值小于0 → 自动变为0<br>person.age &#x3D; -10;<br>console.log(person.age); &#x2F;&#x2F; 0</p>
+<h2 id="拖拽商品"><a href="#拖拽商品" class="headerlink" title="拖拽商品"></a>拖拽商品</h2><p>用鼠标按下拖动图片到购物车（即 id&#x3D;”trolley” 的节点）中，然后松开鼠标，购物车会添加拖动的商品，并显示购物车商品数量。<br>下方（即 class&#x3D;”result” 的方框）会显示购物车中商品的详情，详情以商品名 x 数量的形式展示，商品之间通过空格间隔。<br>下方（即 class&#x3D;”result” 的方框）同时还会显示购物车中商品的总价。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">  // TODO: 请补充实现代码</span><br><span class="line">  computed: &#123;</span><br><span class="line">    totalPrice() &#123;</span><br><span class="line">     return this.bought.reduce((sum,e)=&gt;&#123;return sum+e.price&#125;,0)</span><br><span class="line">    &#125;,</span><br><span class="line">    goodsDetail() &#123;</span><br><span class="line">    const goodsCount=&#123;&#125;</span><br><span class="line">    this.bought.forEach(item=&gt;&#123;</span><br><span class="line">      if(goodsCount[item.name])&#123;goodsCount[item.name]++;&#125;</span><br><span class="line">      else&#123;goodsCount[item.name]=1;&#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    return Object.entries(goodsCount).map(([name,count])=&gt;&#123;return `$&#123;name&#125;*$&#123;count&#125;`&#125;).join(&#x27;&#x27;)</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handleDragStart(e,good)&#123;</span><br><span class="line">      e.dataTransfer.setData(&#x27;good&#x27;,JSON.stringify(good))</span><br><span class="line">    &#125;</span><br><span class="line">    ,handleDrop(e)&#123;</span><br><span class="line">      e.preventDefault()</span><br><span class="line">      const goodData=e.dataTransfer.getData(&#x27;good&#x27;)</span><br><span class="line">      if(goodData)&#123;</span><br><span class="line">        this.bought.push(JSON.parse(goodData))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://msh-18751628429.github.io/project">Msh</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://msh-18751628429.github.io/project/2026/02/22/js%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/">https://msh-18751628429.github.io/project/2026/02/22/js%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://msh-18751628429.github.io/project" target="_blank">MShBlog</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/project/images/cover.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width no-desc" href="/project/2026/02/18/echarts%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E9%A1%B9/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2"></div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/project/images/avatar.jpg" onerror="this.onerror=null;this.src='/project/images/error/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Msh</div><div class="author-info-description">这是一个关于编程、技术和生活的个人博客</div><div class="site-data"><a href="/project/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/project/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/project/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/msh-18751628429"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%9A%8F%E6%9C%BA%E5%B1%95%E7%A4%BA%E5%B7%B2%E7%BB%8F%E5%86%99%E5%A5%BD%E7%9A%84%E7%A5%9D%E7%A6%8F%E8%AF%AD"><span class="toc-number">1.</span> <span class="toc-text">1.随机展示已经写好的祝福语</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="toc-number"></span> <span class="toc-text">生成随机数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%93%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E7%9A%84%E4%BD%8D%E6%95%B0%E5%A4%A7%E4%BA%8E-3-%E4%BD%8D%E6%95%B0%E6%97%B6%EF%BC%8C%E9%9C%80%E8%A6%81%E5%B0%86%E4%B8%8A%E8%BF%B0%E8%BE%93%E5%85%A5%E7%9A%84%E9%87%91%E9%A2%9D%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E4%BD%BF%E7%94%A8%E5%8D%83%E5%88%86%E4%BD%8D%EF%BC%88%E5%8D%B3%EF%BC%8C%E7%94%A8%E8%8B%B1%E6%96%87%E9%80%97%E5%8F%B7-%E2%80%9C-%E2%80%9D-%EF%BC%89%E5%88%86%E9%9A%94%E5%A4%84%E7%90%86"><span class="toc-number"></span> <span class="toc-text">当用户输入的位数大于 3 位数时，需要将上述输入的金额字符串，使用千分位（即，用英文逗号 “,” ）分隔处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E5%AF%86%E7%A0%81%E5%BC%BA%E5%BA%A6"><span class="toc-number"></span> <span class="toc-text">验证密码强度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2"><span class="toc-number"></span> <span class="toc-text">数据转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#slice-substring"><span class="toc-number"></span> <span class="toc-text">slice substring</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#url%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90%E9%AB%98%E4%BA%AE%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="toc-number"></span> <span class="toc-text">url参数解析高亮文本内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E6%96%87%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number"></span> <span class="toc-text">回文字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%B2%E6%8A%96"><span class="toc-number"></span> <span class="toc-text">防抖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86%E5%B9%B3%E9%93%BA%E7%9A%84%E7%BB%93%E6%9E%84%E8%BD%AC%E5%8C%96%E4%B8%BA%E6%A0%91%E7%8A%B6%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="toc-number"></span> <span class="toc-text">将平铺的结构转化为树状结构：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E6%94%B6%E4%B8%80%E4%B8%AA%E5%85%A8%E9%87%8F%E7%9A%84%E5%9C%B0%E5%9D%80%E4%BF%A1%E6%81%AF%E4%BB%A5%E5%8F%8A%E9%9C%80%E8%A6%81%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%9C%B0%E5%9D%80%E3%80%82%E5%85%A8%E9%87%8F%E5%9C%B0%E5%9D%80%E4%BF%A1%E6%81%AF%E6%98%AF%E6%A0%91%E5%BD%A2%E6%A0%BC%E5%BC%8F%EF%BC%8C%E7%BB%93%E6%9E%9C%E5%BD%A2%E5%A6%82%EF%BC%9A"><span class="toc-number"></span> <span class="toc-text">接收一个全量的地址信息以及需要查询的地址。全量地址信息是树形格式，结果形如：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#proxy-%E4%BB%A3%E7%90%86"><span class="toc-number"></span> <span class="toc-text">proxy 代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Proxy"><span class="toc-number"></span> <span class="toc-text">Proxy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%96%E6%8B%BD%E5%95%86%E5%93%81"><span class="toc-number"></span> <span class="toc-text">拖拽商品</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/project/2026/02/22/js%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/" title="js相关题目"><img src="/project/images/cover.jpg" onerror="this.onerror=null;this.src='/project/images/error/404.jpg'" alt="js相关题目"/></a><div class="content"><a class="title" href="/project/2026/02/22/js%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/" title="js相关题目">js相关题目</a><time datetime="2026-02-22T08:48:54.000Z" title="发表于 2026-02-22 16:48:54">2026-02-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/project/2026/02/18/echarts%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E9%A1%B9/" title="无标题">无标题</a><time datetime="2026-02-18T11:16:02.778Z" title="发表于 2026-02-18 19:16:02">2026-02-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/project/2026/02/17/uniapp-pj/" title="uniapp pj"><img src="/project/images/cover.jpg" onerror="this.onerror=null;this.src='/project/images/error/404.jpg'" alt="uniapp pj"/></a><div class="content"><a class="title" href="/project/2026/02/17/uniapp-pj/" title="uniapp pj">uniapp pj</a><time datetime="2026-02-17T11:20:20.000Z" title="发表于 2026-02-17 19:20:20">2026-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/project/2026/02/16/%E5%9F%BA%E7%A1%80/" title="无~~"><img src="/project/images/cover.jpg" onerror="this.onerror=null;this.src='/project/images/error/404.jpg'" alt="无~~"/></a><div class="content"><a class="title" href="/project/2026/02/16/%E5%9F%BA%E7%A1%80/" title="无~~">无~~</a><time datetime="2026-02-16T07:50:50.000Z" title="发表于 2026-02-16 15:50:50">2026-02-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/project/2026/02/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" title="我的第一篇文章"><img src="/project/images/cover.jpg" onerror="this.onerror=null;this.src='/project/images/error/404.jpg'" alt="我的第一篇文章"/></a><div class="content"><a class="title" href="/project/2026/02/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" title="我的第一篇文章">我的第一篇文章</a><time datetime="2026-02-03T03:00:54.000Z" title="发表于 2026-02-03 11:00:54">2026-02-03</time></div></div></div></div></div></div></main><footer id="footer" style="background: [object Object];"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Msh</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/project/js/utils.js?v=5.5.4"></script><script src="/project/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://your-domain.com',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.8.0/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client@3.8.0/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script async data-pjax src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

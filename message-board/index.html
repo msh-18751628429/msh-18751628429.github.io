@@ -1,0 +1,420 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>message-board | MShBlog</title><meta name="author" content="Msh"><meta name="copyright" content="Msh"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content=".board-wrapper {   background: rgba(255, 255, 255, 0.9);   backdrop-filter: blur(10px);   border-radius: 20px;   padding: 2rem;   margin: 2rem auto;   max-width: 900px; }      🎉 欢迎来到留言板这里是一个自由交流的空间，">
+<meta property="og:type" content="website">
+<meta property="og:title" content="message-board">
+<meta property="og:url" content="https://msh-18751628429.github.io/project/message-board/index.html">
+<meta property="og:site_name" content="MShBlog">
+<meta property="og:description" content=".board-wrapper {   background: rgba(255, 255, 255, 0.9);   backdrop-filter: blur(10px);   border-radius: 20px;   padding: 2rem;   margin: 2rem auto;   max-width: 900px; }      🎉 欢迎来到留言板这里是一个自由交流的空间，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://msh-18751628429.github.io/project/images/avatar.jpg">
+<meta property="article:published_time" content="2026-02-18T13:28:09.000Z">
+<meta property="article:modified_time" content="2026-02-18T13:33:05.131Z">
+<meta property="article:author" content="Msh">
+<meta property="article:tag" content="编程,技术,博客,前端,后端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://msh-18751628429.github.io/project/images/avatar.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/project/img/favicon.png"><link rel="canonical" href="https://msh-18751628429.github.io/project/message-board/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/project/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/project/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'message-board',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'message-board'
+}</script><style>
+  /* 黑暗模式代码块全局修复 */
+[data-theme="dark"] {
+  --highlight-bg: #1e1e1e;
+  --highlight-border: #2d2d2d;
+  --highlight-color: #d4d4d4;
+}
+
+[data-theme="dark"] .highlight,
+[data-theme="dark"] pre,
+[data-theme="dark"] code.hljs {
+  background: var(--highlight-bg) !important;
+  border-color: var(--highlight-border) !important;
+  color: var(--highlight-color) !important;
+}
+
+/* 行号背景 */
+[data-theme="dark"] .highlight .gutter {
+  background-color: #252526 !important;
+  border-right: 1px solid #2d2d2d !important;
+}
+
+/* 代码块标题栏 */
+[data-theme="dark"] .highlight figcaption {
+  background-color: #252526 !important;
+  border-bottom: 1px solid #2d2d2d !important;
+  color: #ccc !important;
+}
+  
+  #body-wrap .post{
+   background: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(3px);
+    
+    -webkit-backdrop-filter: blur(2px) saturate(180%);
+   
+  }
+  #card-toc .card-widget{
+
+  background:rgba(255,255,255,0.4)!important;
+  }
+  /* TOC 项 */
+  #aside-content #card-toc .toc-item .toc-link {
+    color:#504e4e!important;
+  }
+  
+  /* TOC 激活项 */
+  #aside-content #card-toc .toc-item.active .toc-link {
+    color:#121212 !important;
+    
+    background:rgba(255,255,255,0.5)!important;
+ 
+  }
+  
+  /* TOC 悬停 */
+  #aside-content #card-toc .toc-item .toc-link:hover {
+    color:#121212 !important;
+   background:rgba(255,255,255,0.5)!important;
+ 
+  }
+  
+  #post{
+   background:rgba(255,255,255,0.45)!important;
+ 
+  }
+  #recent-posts .recent-post-item > .recent-post-info > .article-title {
+    color: #121212!important;}
+  #recent-posts .recent-post-item > .recent-post-info > .article-meta-wrap{
+    color: #121212!important;}
+  #recent-posts .recent-post-item > .recent-post-info > .post-meta-date {
+    color: #121212!important;}
+  #recent-posts .recent-post-item > .recent-post-info > .content {
+    color: #121212!important;}
+  /* 卡片背景 */
+  #recent-posts .recent-post-item {
+  border:1px solid #bbbab175;
+  background: rgba(255,255,255,0.5) !important;
+    backdrop-filter: blur(3px) !important;
+    -webkit-backdrop-filter: blur(1px) !important;}
+  #content-inner {
+  border:1px solid #bbbab175;
+    background-color: rgba(255,255,255,0.5) !important;
+  }
+  .container pre{
+  background: rgba(255, 255, 255,0.55) !important;
+  }
+   .card-widget {
+   color:#121212;
+   border:1px solid #bbbab175;
+     background:  rgba(255,255,255,0.5) !important;
+    backdrop-filter: blur(2px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;}
+  }
+   
+  .site-data .headline{
+  color:#121212!important;
+  }
+  .site-data .headline{
+  color:#121212!important;
+  }
+  #aside-content .aside-list > .aside-list-item .content > .title{
+  color:rgba(56,165,187)!important;}
+  
+  .site-data > a .length-num{color:rgba(56,165,187)!important;}
+
+  #aside-content .card-archives ul.card-archive-list > .card-archive-list-item a span{
+  color:#504e4e!important;}
+
+  .card-recent-post .aside-list .no-cover .title,.card-recent-post .aside-list .no-cover time{
+  color:#121212!important;}
+
+  #aside-content .card-categories ul.card-category-list > .card-category-list-item a span{
+  color:#504e4e!important;}
+  /* 归档页面卡片样式 */
+  #archive{
+  background:rgba(255,255,255,0.3);
+ 
+  color:#504e4e!important;
+  border:1px solid #bbbab175;
+  }
+  #archive .article-sort-item-title{color:#504e4e!important;}
+  
+  
+  /* 分类页面卡片样式 */
+  #page{
+  background: rgba(255,255,255,0.5);
+  border:1px solid #bbbab175;
+  backdrop-filter: blur(5px) !important;
+  color:#504e4e!important;
+  }
+
+  /* 标签页面卡片样式 */
+  #tag{
+  border:1px solid #bbbab175;
+  backdrop-filter: blur(5px) !important;
+  background: rgba(255,255,255,0.5);
+  color:#504e4e!important;
+  }
+  #nav {
+    background: rgba(255, 255, 255, 0.1);
+    font-family: 'Georgia', 'Times New Roman', 'Songti SC', serif;
+    
+  }
+   #footer {
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(2px) saturate(180%);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    color: #333;
+    margin-top:30px;
+  }
+  
+ 
+
+  .footer-nav {
+    font-size: 14px;
+    margin: 20px 0;
+  }
+  .footer-nav a {
+    color: #666;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+  }
+  .footer-nav a:hover {
+    color: #3498db;
+    text-decoration: underline;
+  }
+</style>
+<meta name="generator" content="Hexo 7.3.0"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/project/images/bg1.jpeg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/project/images/avatar.jpg" onerror="this.onerror=null;this.src='/project/images/error/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/project/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/project/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/project/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/project/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/project/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/project/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/project/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/project/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/project/comments/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div></div></div></div><div class="page type-board" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url(/project/images/home.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/project/"><span class="site-name">MShBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/project/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/project/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/project/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/project/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/project/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/project/comments/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">message-board</h1></div></header><main class="layout hide-aside" id="content-inner"><div id="page"><div class="container" id="article-container"><style>
+.board-wrapper {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 900px;
+}
+</style>
+
+<div class="board-wrapper">
+
+<p><img src="https://img.icons8.com/color/96/000000/topic--v1.png" alt="留言板图标"></p>
+<h2 id="🎉-欢迎来到留言板"><a href="#🎉-欢迎来到留言板" class="headerlink" title="🎉 欢迎来到留言板"></a>🎉 欢迎来到留言板</h2><p>这里是一个自由交流的空间，你可以：</p>
+<ul>
+<li>💡 分享你的想法和见解</li>
+<li>❓ 提出技术问题</li>
+<li>💬 交流学习经验</li>
+<li>📢 提供网站改进建议</li>
+<li>😊 随便聊聊天</li>
+</ul>
+<h3 id="📋-发言守则"><a href="#📋-发言守则" class="headerlink" title="📋 发言守则"></a>📋 发言守则</h3><div class="note warning flat"><ol>
+<li><strong>相互尊重</strong>：请保持友善的讨论氛围</li>
+<li><strong>内容相关</strong>：尽量围绕技术、学习、生活等话题</li>
+<li><strong>禁止事项</strong>：广告、 spam、攻击性言论</li>
+<li><strong>隐私保护</strong>：建议使用昵称，保护个人信息</li>
+</ol>
+</div>
+
+<h3 id="🔔-注意事项"><a href="#🔔-注意事项" class="headerlink" title="🔔 注意事项"></a>🔔 注意事项</h3><ul>
+<li>留言审核后显示（防 spam）</li>
+<li>支持 Markdown 语法</li>
+<li>回复会有邮件通知（如果提供邮箱）</li>
+<li>我会尽量在 24 小时内回复</li>
+</ul>
+<h3 id="📞-其他联系方式"><a href="#📞-其他联系方式" class="headerlink" title="📞 其他联系方式"></a>📞 其他联系方式</h3><p>如果留言不适合公开讨论，可以通过以下方式联系我：</p>
+<ul>
+<li><strong>邮箱</strong>: <a href="mailto:&#99;&#x6f;&#110;&#x74;&#x61;&#99;&#116;&#64;&#x65;&#x78;&#97;&#109;&#112;&#108;&#x65;&#x2e;&#x63;&#111;&#109;">&#99;&#x6f;&#110;&#x74;&#x61;&#99;&#116;&#64;&#x65;&#x78;&#97;&#109;&#112;&#108;&#x65;&#x2e;&#x63;&#111;&#109;</a></li>
+<li><strong>GitHub Issues</strong>: <a target="_blank" rel="noopener" href="https://github.com/username/repo/issues">提交问题</a></li>
+<li><strong>Telegram</strong>: @yourusername</li>
+</ul>
+<hr>
+<h2 id="✍️-开始留言"><a href="#✍️-开始留言" class="headerlink" title="✍️ 开始留言"></a>✍️ 开始留言</h2><p><em>感谢你的每一次交流！</em></p>
+</div>
+
+<!-- 访问统计 -->
+<div align="center">
+  <small>📊 本页面访问次数: <span id="busuanzi_value_page_pv"></span></small>
+</div>
+</div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div></main><footer id="footer" style="background: [object Object];"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Msh</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/project/js/utils.js?v=5.5.4"></script><script src="/project/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://your-domain.com',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.8.0/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client@3.8.0/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script async data-pjax src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
